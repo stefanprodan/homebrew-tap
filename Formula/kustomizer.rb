@@ -5,12 +5,12 @@
 class Kustomizer < Formula
   desc "Kustomizer CLI"
   homepage "https://kustomizer.dev/"
-  version "2.0.0-rc.2"
+  version "2.0.0-rc.3"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/stefanprodan/kustomizer/releases/download/v2.0.0-rc.2/kustomizer_2.0.0-rc.2_darwin_amd64.tar.gz"
-      sha256 "d8a005a7f72e217f1748f903440b1b0973949ae4dcc4de1a9fb3929f4fb6af2b"
+      url "https://github.com/stefanprodan/kustomizer/releases/download/v2.0.0-rc.3/kustomizer_2.0.0-rc.3_darwin_amd64.tar.gz"
+      sha256 "e9b5bb91a03b484a5bef7174a2440aafa5524ad4dac958d91187cdf120ec0f43"
 
       def install
         bin.install "kustomizer"
@@ -23,8 +23,8 @@ class Kustomizer < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/stefanprodan/kustomizer/releases/download/v2.0.0-rc.2/kustomizer_2.0.0-rc.2_darwin_arm64.tar.gz"
-      sha256 "a9da64527da318f03c7f52c2197965ceb63dce559550a71c0dcbd9e123eb4278"
+      url "https://github.com/stefanprodan/kustomizer/releases/download/v2.0.0-rc.3/kustomizer_2.0.0-rc.3_darwin_arm64.tar.gz"
+      sha256 "877f84b52d8b77e159e790f766267817aad858af7fdf96ad426cfa235e9eda72"
 
       def install
         bin.install "kustomizer"
@@ -39,9 +39,9 @@ class Kustomizer < Formula
   end
 
   on_linux do
-    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/stefanprodan/kustomizer/releases/download/v2.0.0-rc.2/kustomizer_2.0.0-rc.2_linux_arm64.tar.gz"
-      sha256 "acae8acdc67415644d5042585d8c2768bcac01aa34f7b18bd581434a077f73b4"
+    if Hardware::CPU.intel?
+      url "https://github.com/stefanprodan/kustomizer/releases/download/v2.0.0-rc.3/kustomizer_2.0.0-rc.3_linux_amd64.tar.gz"
+      sha256 "3740c46c150f764fa0b13372f627f4523da01c727bda67efbbbac8dc8b87edc1"
 
       def install
         bin.install "kustomizer"
@@ -53,9 +53,9 @@ class Kustomizer < Formula
         (fish_completion/"kustomizer.fish").write fish_output
       end
     end
-    if Hardware::CPU.intel?
-      url "https://github.com/stefanprodan/kustomizer/releases/download/v2.0.0-rc.2/kustomizer_2.0.0-rc.2_linux_amd64.tar.gz"
-      sha256 "79ebabd4ddac12a09721178b0dd2e263aee0ddc084bc21edb767d56038416b3b"
+    if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
+      url "https://github.com/stefanprodan/kustomizer/releases/download/v2.0.0-rc.3/kustomizer_2.0.0-rc.3_linux_arm64.tar.gz"
+      sha256 "68a0aed9ced128cb3a5b5c4a128ccce3913a9866a803b52aa5dcfc1eab274cde"
 
       def install
         bin.install "kustomizer"
