@@ -5,15 +5,15 @@
 class Timoni < Formula
   desc "Timoni CLI"
   homepage "https://timoni.sh"
-  version "0.12.0"
+  version "0.12.1"
 
   depends_on "cue" => :optional
   depends_on "diffutils" => :optional
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/stefanprodan/timoni/releases/download/v0.12.0/timoni_0.12.0_darwin_amd64.tar.gz"
-      sha256 "7b35cdc3cc29370e58ccb0553bd5d405fd8024f7376fba0ad1c18c8103b3b0c8"
+    if Hardware::CPU.arm?
+      url "https://github.com/stefanprodan/timoni/releases/download/v0.12.1/timoni_0.12.1_darwin_arm64.tar.gz"
+      sha256 "78ce38fe67882358fcd1aef5ddb23601b0e7836bd7a6127e0d2167743f6d8d8e"
 
       def install
         bin.install "timoni"
@@ -25,9 +25,9 @@ class Timoni < Formula
         (fish_completion/"timoni.fish").write fish_output
       end
     end
-    if Hardware::CPU.arm?
-      url "https://github.com/stefanprodan/timoni/releases/download/v0.12.0/timoni_0.12.0_darwin_arm64.tar.gz"
-      sha256 "a322f55d953a1f4f05438a305611759759eaa7c75494d54491afb88613d1af3e"
+    if Hardware::CPU.intel?
+      url "https://github.com/stefanprodan/timoni/releases/download/v0.12.1/timoni_0.12.1_darwin_amd64.tar.gz"
+      sha256 "2136e2083a2ee7f126e891f9587ba034de3d01e34b920d08e470e294bd187ff5"
 
       def install
         bin.install "timoni"
@@ -43,8 +43,8 @@ class Timoni < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/stefanprodan/timoni/releases/download/v0.12.0/timoni_0.12.0_linux_arm64.tar.gz"
-      sha256 "cdd57c96074aa7e0d17201d47b4ee209b602cb030174f7b02a56cafb09ec2eed"
+      url "https://github.com/stefanprodan/timoni/releases/download/v0.12.1/timoni_0.12.1_linux_arm64.tar.gz"
+      sha256 "39ac3d4bd29fa56a5b328ac353b11724cccd8613c2f1c8558ddf5c5de34a5d36"
 
       def install
         bin.install "timoni"
@@ -57,8 +57,8 @@ class Timoni < Formula
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/stefanprodan/timoni/releases/download/v0.12.0/timoni_0.12.0_linux_amd64.tar.gz"
-      sha256 "d0f68cacd6394dca0e2376a13f482029e6ee99cfee73ddca68164a4143b3eee7"
+      url "https://github.com/stefanprodan/timoni/releases/download/v0.12.1/timoni_0.12.1_linux_amd64.tar.gz"
+      sha256 "96fdb2ff204ae30d265973313a8ac7463b03c6c26eea9028fa28b7172052552d"
 
       def install
         bin.install "timoni"
