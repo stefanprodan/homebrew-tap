@@ -5,15 +5,15 @@
 class Timoni < Formula
   desc "Timoni CLI"
   homepage "https://timoni.sh"
-  version "0.24.0"
+  version "0.25.0"
 
   depends_on "cue" => :optional
   depends_on "diffutils" => :optional
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/stefanprodan/timoni/releases/download/v0.24.0/timoni_0.24.0_darwin_amd64.tar.gz"
-      sha256 "5e5e58d4acf6b2d99b4bce0c4fb03b27c5d25c7be8c620b68a985e889f9f75dd"
+      url "https://github.com/stefanprodan/timoni/releases/download/v0.25.0/timoni_0.25.0_darwin_amd64.tar.gz"
+      sha256 "4b63381341380972b99b44c497656a53b21ee16580830ceaa2a16bc26ac52dfb"
 
       def install
         bin.install "timoni"
@@ -26,8 +26,8 @@ class Timoni < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/stefanprodan/timoni/releases/download/v0.24.0/timoni_0.24.0_darwin_arm64.tar.gz"
-      sha256 "38034f8ff71820b3ea89d1d971f4ed963160f643fa6c3b97c1d60091f4526fef"
+      url "https://github.com/stefanprodan/timoni/releases/download/v0.25.0/timoni_0.25.0_darwin_arm64.tar.gz"
+      sha256 "6642d7f44bf6f2d525c0475ca80f6bf71166af7e37a65887c5d9d82910991f62"
 
       def install
         bin.install "timoni"
@@ -42,36 +42,30 @@ class Timoni < Formula
   end
 
   on_linux do
-    if Hardware::CPU.intel?
-      if Hardware::CPU.is_64_bit?
-        url "https://github.com/stefanprodan/timoni/releases/download/v0.24.0/timoni_0.24.0_linux_amd64.tar.gz"
-        sha256 "f6c8ce38849364218e2f470f19da2f0af1530f88e78aa9a3437a9af1e9beb2e5"
-
-        def install
-          bin.install "timoni"
-          bash_output = Utils.safe_popen_read(bin/"timoni", "completion", "bash")
-          (bash_completion/"timoni").write bash_output
-          zsh_output = Utils.safe_popen_read(bin/"timoni", "completion", "zsh")
-          (zsh_completion/"_timoni").write zsh_output
-          fish_output = Utils.safe_popen_read(bin/"timoni", "completion", "fish")
-          (fish_completion/"timoni.fish").write fish_output
-        end
+    if Hardware::CPU.intel? and Hardware::CPU.is_64_bit?
+      url "https://github.com/stefanprodan/timoni/releases/download/v0.25.0/timoni_0.25.0_linux_amd64.tar.gz"
+      sha256 "0cbb2b9d8c6dd8d88157340f55007f21b7eec2fe3a47d2dd5bb4857b890999af"
+      def install
+        bin.install "timoni"
+        bash_output = Utils.safe_popen_read(bin/"timoni", "completion", "bash")
+        (bash_completion/"timoni").write bash_output
+        zsh_output = Utils.safe_popen_read(bin/"timoni", "completion", "zsh")
+        (zsh_completion/"_timoni").write zsh_output
+        fish_output = Utils.safe_popen_read(bin/"timoni", "completion", "fish")
+        (fish_completion/"timoni.fish").write fish_output
       end
     end
-    if Hardware::CPU.arm?
-      if Hardware::CPU.is_64_bit?
-        url "https://github.com/stefanprodan/timoni/releases/download/v0.24.0/timoni_0.24.0_linux_arm64.tar.gz"
-        sha256 "058128a2071907f3bb45f5fa48a6efe3ccd1d4eeac2cae4d9bee80ff8959b4e5"
-
-        def install
-          bin.install "timoni"
-          bash_output = Utils.safe_popen_read(bin/"timoni", "completion", "bash")
-          (bash_completion/"timoni").write bash_output
-          zsh_output = Utils.safe_popen_read(bin/"timoni", "completion", "zsh")
-          (zsh_completion/"_timoni").write zsh_output
-          fish_output = Utils.safe_popen_read(bin/"timoni", "completion", "fish")
-          (fish_completion/"timoni.fish").write fish_output
-        end
+    if Hardware::CPU.arm? and Hardware::CPU.is_64_bit?
+      url "https://github.com/stefanprodan/timoni/releases/download/v0.25.0/timoni_0.25.0_linux_arm64.tar.gz"
+      sha256 "b3481a14ba2363fffe0b948740de35afb6ca54d62de6589c6d3de0a6e181ae9d"
+      def install
+        bin.install "timoni"
+        bash_output = Utils.safe_popen_read(bin/"timoni", "completion", "bash")
+        (bash_completion/"timoni").write bash_output
+        zsh_output = Utils.safe_popen_read(bin/"timoni", "completion", "zsh")
+        (zsh_completion/"_timoni").write zsh_output
+        fish_output = Utils.safe_popen_read(bin/"timoni", "completion", "fish")
+        (fish_completion/"timoni.fish").write fish_output
       end
     end
   end
