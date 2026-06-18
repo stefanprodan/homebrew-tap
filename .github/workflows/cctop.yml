@@ -1,0 +1,46 @@
+name: cctop
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Find latest release
+        id: latest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag=$(gh release view --repo stefanprodan/cctop --json tagName -q .tagName)
+          latest_release=${tag#v}
+          echo latest-release="${latest_release}" >> $GITHUB_OUTPUT
+      - name: Download checksums.txt
+        env:
+          latest_release: ${{ steps.latest.outputs.latest-release }}
+        run: curl -fsLo checksums.txt "https://github.com/stefanprodan/cctop/releases/download/v${latest_release}/cctop_checksums.txt"
+      - name: Update formula
+        env:
+          latest_release: ${{ steps.latest.outputs.latest-release }}
+        run: ./hack/cctop.sh
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ github.token }}
+          commit-message: Release cctop v${{ steps.latest.outputs.latest-release }}
+          committer: GitHub <noreply@github.com>
+          author: stefanprodan <stefanprodan@users.noreply.github.com>
+          signoff: true
+          branch: cctop-release
+          title: Release cctop v${{ steps.latest.outputs.latest-release }}
+          body: Release cctop v${{ steps.latest.outputs.latest-release }}
