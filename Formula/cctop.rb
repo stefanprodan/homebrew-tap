@@ -5,21 +5,21 @@
 class Cctop < Formula
   desc "Live top-style monitor for Claude Code sessions"
   homepage "https://github.com/stefanprodan/cctop"
-  version "0.6.0"
+  version "0.6.1"
   license "Apache-2.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/stefanprodan/cctop/releases/download/v0.6.0/cctop_darwin_amd64.tar.gz"
-      sha256 "51bfe5241f6050504354a945191c57561ff19a7bc306c9262b6d74d304310cb7"
+      url "https://github.com/stefanprodan/cctop/releases/download/v0.6.1/cctop_darwin_amd64.tar.gz"
+      sha256 "4a462b573aa3f92cdb90b9483fa2d7ad9b61eddd204a8cd6996d3a125385b86e"
 
       define_method(:install) do
         bin.install "cctop"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/stefanprodan/cctop/releases/download/v0.6.0/cctop_darwin_arm64.tar.gz"
-      sha256 "6516a9e32a4fcc61c7b64666928505e58bb761f286d047c11d6be9e5b1adf622"
+      url "https://github.com/stefanprodan/cctop/releases/download/v0.6.1/cctop_darwin_arm64.tar.gz"
+      sha256 "2f9f2c43b9b4c6fab7e2dd9279d8f79fbcf274b1db089cfd5a5e8c301d868581"
 
       define_method(:install) do
         bin.install "cctop"
@@ -29,16 +29,16 @@ class Cctop < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/stefanprodan/cctop/releases/download/v0.6.0/cctop_linux_amd64.tar.gz"
-      sha256 "30cc42e59e9083c369f5c1b6419c6a5da4210f86d40e5d3468b8cda9cdda91b1"
+      url "https://github.com/stefanprodan/cctop/releases/download/v0.6.1/cctop_linux_amd64.tar.gz"
+      sha256 "4b39c2ed0ab46429499077b646bc9e096dad6d00b51193d037c70fd646eeeaf7"
 
       define_method(:install) do
         bin.install "cctop"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/stefanprodan/cctop/releases/download/v0.6.0/cctop_linux_arm64.tar.gz"
-      sha256 "166743ad3abd10aba8ab9e137d7c5c4b5340bfc75153ef2a94c57627f9f76c2f"
+      url "https://github.com/stefanprodan/cctop/releases/download/v0.6.1/cctop_linux_arm64.tar.gz"
+      sha256 "69d5d3ac57ac2f458fc07593a62aac75fa2acf07ff424e119d0f951a62b15827"
 
       define_method(:install) do
         bin.install "cctop"
