@@ -1,0 +1,59 @@
+name: release
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    strategy:
+      fail-fast: false
+      matrix:
+        formula:
+          - cctop
+          - timoni
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Find latest release
+        id: latest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag=$(gh release view --repo stefanprodan/${{ matrix.formula }} --json tagName -q .tagName)
+          latest_release=${tag#v}
+          echo latest-release="${latest_release}" >> $GITHUB_OUTPUT
+      - name: Download checksums
+        env:
+          GH_TOKEN: ${{ github.token }}
+          latest_release: ${{ steps.latest.outputs.latest-release }}
+        run: |
+          gh release download "v${latest_release}" \
+            --repo stefanprodan/${{ matrix.formula }} \
+            --pattern '*checksums.txt' \
+            --output checksums.txt
+      - name: Update formula
+        env:
+          formula: ${{ matrix.formula }}
+          latest_release: ${{ steps.latest.outputs.latest-release }}
+        run: ./hack/formula.sh
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ github.token }}
+          commit-message: Release ${{ matrix.formula }} v${{ steps.latest.outputs.latest-release }}
+          committer: GitHub <noreply@github.com>
+          author: stefanprodan <stefanprodan@users.noreply.github.com>
+          signoff: true
+          branch: ${{ matrix.formula }}-release
+          title: Release ${{ matrix.formula }} v${{ steps.latest.outputs.latest-release }}
+          body: Release ${{ matrix.formula }} v${{ steps.latest.outputs.latest-release }}
+          add-paths: Formula/${{ matrix.formula }}.rb
