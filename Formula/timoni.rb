@@ -5,15 +5,15 @@
 class Timoni < Formula
   desc "Package manager for Kubernetes powered by CUE"
   homepage "https://timoni.sh"
-  version "0.36.0"
+  version "0.37.0"
   license "Apache-2.0"
 
   depends_on "cue" => :optional
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/stefanprodan/timoni/releases/download/v0.36.0/timoni_0.36.0_darwin_amd64.tar.gz"
-      sha256 "61ca134a86b3379b2f5857a78fee45c8899f3b9f5f33fae1daf08008eaeb26f4"
+      url "https://github.com/stefanprodan/timoni/releases/download/v0.37.0/timoni_0.37.0_darwin_amd64.tar.gz"
+      sha256 "f95897e183687eec9ad0374f7790d1d46f9941662521bff5ce24421261459eca"
 
       define_method(:install) do
         bin.install "timoni"
@@ -26,8 +26,8 @@ class Timoni < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/stefanprodan/timoni/releases/download/v0.36.0/timoni_0.36.0_darwin_arm64.tar.gz"
-      sha256 "ed72d051a7c5deea2e2146fac8e2d960c9611517578e65c6e1daafb6f3f80cd9"
+      url "https://github.com/stefanprodan/timoni/releases/download/v0.37.0/timoni_0.37.0_darwin_arm64.tar.gz"
+      sha256 "aff064be721729bc595c8736ad779466e2eafbd5dcd3e455a18216cce0422c55"
 
       define_method(:install) do
         bin.install "timoni"
@@ -43,8 +43,8 @@ class Timoni < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/stefanprodan/timoni/releases/download/v0.36.0/timoni_0.36.0_linux_amd64.tar.gz"
-      sha256 "dd0eb35cfa54aa39dd066dffc876b4d93488dd9c6230ebd3194a0d79e64f78f0"
+      url "https://github.com/stefanprodan/timoni/releases/download/v0.37.0/timoni_0.37.0_linux_amd64.tar.gz"
+      sha256 "bfbc3e7b6819a290bf92b2251defba325c0f7aeaeb4c46f1ed02614a4fe40ae7"
 
       define_method(:install) do
         bin.install "timoni"
@@ -57,8 +57,8 @@ class Timoni < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/stefanprodan/timoni/releases/download/v0.36.0/timoni_0.36.0_linux_arm64.tar.gz"
-      sha256 "bafd6a99d8104fb8fc8671cf925ab2ee2b363d82c92a85cf875ba35ed8fec1cd"
+      url "https://github.com/stefanprodan/timoni/releases/download/v0.37.0/timoni_0.37.0_linux_arm64.tar.gz"
+      sha256 "ba2f67557eb5c345d57c8df474483c5115fff67f94f67b596ff02845901aa56f"
 
       define_method(:install) do
         bin.install "timoni"
